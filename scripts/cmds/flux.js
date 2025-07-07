@@ -23,15 +23,15 @@ module.exports.onStart = async ({ event, args, api }) => {
 
     const startTime = Date.now();
     
-    const waitMessage = await api.sendMessage("Generating image, please wait... 😘", event.threadID);
-    api.setMessageReaction("⌛", event.messageID, () => {}, true);
+    const waitMessage = await api.sendMessage("Generating image, please w8 🦆", event.threadID);
+    api.setMessageReaction("🆙", event.messageID, () => {}, true);
 
     const apiurl = `${dipto}/flux?prompt=${encodeURIComponent(prompt2)}&ratio=${encodeURIComponent(ratio)}`;
     const response = await axios.get(apiurl, { responseType: "stream" });
 
     const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
 
-    api.setMessageReaction("✅", event.messageID, () => {}, true);
+    api.setMessageReaction("🦆", event.messageID, () => {}, true);
     api.unsendMessage(waitMessage.messageID);
 
     api.sendMessage({
